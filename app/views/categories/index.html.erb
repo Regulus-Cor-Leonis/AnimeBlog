@@ -1,0 +1,31 @@
+<h1>Список категорiй</h1>
+
+<div class="buttons_panel">
+    <%= link_to "Нова категорiя", new_category_path, class: 'btn btn-outline-primary btn-sm' %>
+</div>
+
+<section id="categories">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Назва</th>
+                <th>Батькiвська категорiя</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @categories.each_with_index do |category, index| %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= category.name %></td>
+                    <td><%= category.parent.name if category.parent.present? %></td>
+                    <td>
+                        <%= link_to "Змiнити", edit_category_path(category), class: 'btn btn-outline-primary btn-sm' %>
+                        <%= button_to "Видалити", category_path(category), method: :delete, data: { confirm: 'Ви впевненi?' }, class: 'btn btn-outline-danger btn-sm' %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</section>
